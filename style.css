@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: #0f172a;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 4rem 1.2rem;
+}
+
+.container-implementacao {
+  background-color: #38bdf8;
+  text-align: center;
+  padding: 4rem 1.2rem;
+}
+
+.container-implementacao ol {
+  display: inline-block;
+  text-align: left;
+  margin-top: 1.5rem;
+}
+
+.grid-2 {
+  display: grid;
+  gap: 3rem;
+}
+
+img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+h1, h2, h3 {
+  font-weight: 800;
+}
+
+h1 span {
+  color: #38bdf8;
+}
+
+.hero {
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: #fff;
+}
+
+.hero-text {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1.8rem;
+  padding: 1rem 1.6rem;
+  background: #2563eb;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.context {
+  background: #ffffff;
+}
+
+.problem {
+  background: #e2e8f0;
+}
+
+.highlight {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.list {
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+}
+
+.solution {
+  background: #ffffff;
+}
+
+.benefits {
+  background: #ddeeff;
+}
+
+.benefits-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.benefit-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+}
+
+.products {
+  background: #f8fafc;
+}
+
+.products-grid {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.product-card {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+}
+
+.product-card.basic, .product-card.featured {
+  border: 2px solid #2563eb;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 1rem 0;
+}
+
+.product-desc {
+  margin-bottom: 1.2rem;
+}
+
+.product-card ul {
+  padding-left: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.cta {
+  background: #020617;
+  color: #fff;
+  text-align: center;
+}
+
+.cta-soft{
+  background-color: #bfc6cf;
+}
+
+footer {
+  background: #020617;
+  color: #94a3b8;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq {
+  background: #ffffff;
+}
+
+.faq h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.faq-item {
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+}
+
+.faq-item h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+
+@media (min-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
