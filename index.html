@@ -3,377 +3,947 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lima IA tech | Sistemas de Atendimento Automatizado com IA</title>
+  <title>Lima IA tech | Agente de Atendimento Inicial para Dentistas</title>
 
-  <meta name="description" content="Sistemas de atendimento automatizado com IA para WhatsApp, criados a partir do fluxo real do seu consultório ou negócio. Atendimento organizado, automático e profissional.">
+  <meta name="description" content="Agente de atendimento inicial para consultórios odontológicos no WhatsApp. Organize os primeiros contatos, responda dúvidas frequentes e evite perder pacientes enquanto estiver em atendimento clínico.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121933;
+      --surface: #ffffff;
+      --surface-soft: #f6f8fc;
+      --text: #101828;
+      --text-light: #475467;
+      --white: #ffffff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #22c55e;
+      --border: #dbe3f0;
+      --shadow: 0 20px 50px rgba(10, 20, 40, 0.12);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: var(--surface);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .container,
+    .container-implementacao {
+      width: min(100% - 32px, var(--container));
+      margin: 0 auto;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 18px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    h1 span {
+      color: #8ab4ff;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      font-weight: 800;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0 0 18px;
+      color: var(--text-light);
+      font-size: 1.04rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.28), transparent 35%),
+        radial-gradient(circle at right center, rgba(34, 197, 94, 0.18), transparent 28%),
+        linear-gradient(135deg, #08101f 0%, #101936 48%, #111b3b 100%);
+      padding: 96px 0 84px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 120px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #ffffff 100%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #d7e3ff;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .hero-text {
+      font-size: 1.1rem;
+      color: #d9e3f8;
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 18px;
+      margin: 26px 0 34px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hero-points li {
+      color: #e8efff;
+      font-size: 0.98rem;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .hero-points li::before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      color: #7dd3fc;
+      font-weight: 800;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.28);
+      transition: 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(37, 99, 235, 0.34);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--white);
+      box-shadow: none;
+    }
+
+    .hero-note {
+      color: #c6d4f4;
+      font-size: 0.92rem;
+      margin-top: 14px;
+    }
+
+    .image-box {
+      position: relative;
+    }
+
+    .image-box img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      position: absolute;
+      right: -16px;
+      bottom: -20px;
+      width: min(100%, 320px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 18px 40px rgba(8, 16, 31, 0.18);
+    }
+
+    .hero-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .hero-card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #344054;
+    }
+
+    .context,
+    .solution,
+    .benefits,
+    .faq {
+      background: var(--surface);
+    }
+
+    .context .container,
+    .cta-soft .container,
+    .cta .container {
+      max-width: 920px;
+      text-align: center;
+    }
+
+    .context p,
+    .cta-soft-text {
+      font-size: 1.08rem;
+    }
+
+    .problem {
+      background: linear-gradient(180deg, #f7f9fc 0%, #eef4ff 100%);
+    }
+
+    .highlight {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .list {
+      padding: 0;
+      margin: 0 0 22px;
+      list-style: none;
+    }
+
+    .list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      color: var(--text-light);
+      font-size: 1rem;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), #60a5fa);
+      box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.10);
+    }
+
+    .solution .grid-2,
+    .problem .grid-2 {
+      align-items: center;
+    }
+
+    .cta-soft {
+      background: linear-gradient(135deg, #0f172a 0%, #172554 100%);
+      color: var(--white);
+    }
+
+    .cta-soft-text {
+      color: #d7e3ff;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+
+    .benefits h2,
+    .products h2,
+    .faq h2 {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .benefit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 28px 24px;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.05);
+    }
+
+    .benefit-card h3 {
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .benefit-card p {
+      margin-bottom: 0;
+      font-size: 0.98rem;
+    }
+
+    .products {
+      background: linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+    }
+
+    .section-subtitle {
+      max-width: 760px;
+      margin: 0 auto 40px;
+      text-align: center;
+      font-size: 1.06rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border: 1px solid #d9e4f7;
+      border-radius: 28px;
+      padding: 34px 30px;
+      box-shadow: 0 24px 50px rgba(15, 23, 42, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--primary) 0%, #60a5fa 50%, #22c55e 100%);
+    }
+
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e8f0ff;
+      color: var(--primary-dark);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .product-card h3 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .product-desc {
+      font-size: 1.06rem;
+      max-width: 720px;
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 20px;
+      list-style: none;
+      padding: 0;
+      margin: 28px 0;
+    }
+
+    .product-list li {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      color: #344054;
+      padding: 14px 16px 14px 42px;
+      border-radius: 16px;
+      position: relative;
+      font-size: 0.98rem;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+    }
+
+    .product-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(34, 197, 94, 0.14);
+      color: #15803d;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+    }
+
+    .price-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 24px 0;
+    }
+
+    .price-panel {
+      background: #0f172a;
+      color: var(--white);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .price-panel .price-label {
+      margin: 0 0 8px;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .price-panel .price {
+      margin: 0;
+      font-size: 1.9rem;
+      line-height: 1.1;
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    .price-panel .price small {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.96rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .setup-desc {
+      font-size: 0.98rem;
+      margin-bottom: 26px;
+    }
+
+    .product-footnote {
+      font-size: 0.92rem;
+      color: #667085;
+      margin-top: 14px;
+    }
+
+    .implementation {
+      background: var(--surface);
+    }
+
+    .implementation .container-implementacao {
+      max-width: 900px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 42px 32px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+    }
+
+    .implementation h2 {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .implementation ol {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--text-light);
+    }
+
+    .implementation li {
+      margin-bottom: 14px;
+      font-size: 1rem;
+      padding-left: 6px;
+    }
+
+    .faq {
+      background: #0b1220;
+      color: var(--white);
+    }
+
+    .faq h2 {
+      color: var(--white);
+    }
+
+    .faq-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .faq-item h3 {
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .faq-item p {
+      color: #d0d8ea;
+      margin-bottom: 0;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .cta h2 {
+      color: var(--white);
+    }
+
+    .cta p {
+      color: #e6eeff;
+      max-width: 760px;
+      margin-inline: auto;
+      font-size: 1.08rem;
+    }
+
+    footer {
+      padding: 26px 16px 40px;
+      text-align: center;
+      background: #07101d;
+      color: #c8d3ea;
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 991px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .hero {
+        padding-top: 72px;
+      }
+
+      .hero-card {
+        position: static;
+        width: 100%;
+        margin-top: 18px;
+      }
+
+      .benefits-grid,
+      .price-box,
+      .product-list {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .product-card,
+      .implementation .container-implementacao,
+      .benefit-card,
+      .faq-item {
+        padding: 22px 18px;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container grid-2">
-    <div>
-      <h1>
-        Transformamos o seu fluxo de atendimento em um
-        <span>sistema de IA</span> que trabalha no WhatsApp por você
-      </h1>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container grid-2">
+      <div>
+        <div class="eyebrow">Agente de atendimento inicial para dentistas</div>
 
-      <p class="hero-text">
-        A Lima IA tech desenvolve sistemas de atendimento automatizado baseados no
-        funcionamento real do seu consultório ou negócio, organizando conversas,
-        respondendo mensagens automaticamente e evitando a perda de contatos.
-      </p>
+        <h1>
+          Organize o WhatsApp do seu consultório com um <span>agente de entrada com IA</span>
+        </h1>
 
-      <a href=https://wa.me/5521993789596 class="btn">Conhecer as soluções</a>
-    </div>
-
-    <div class="image-box">
-      <img src="img/hero.png" alt="Sistema de atendimento automatizado no WhatsApp">
-    </div>
-  </div>
-</section>
-
-<!-- CONTEXTO / EDUCAÇÃO -->
-<section class="context">
-  <div class="container">
-    <h2>O WhatsApp virou o principal canal de contato</h2>
-
-    <p>
-      Hoje, pacientes e clientes esperam respostas rápidas, claras e organizadas.
-      O problema é que a maioria dos profissionais não tem estrutura para manter
-      esse padrão de atendimento o tempo todo.
-    </p>
-
-    <p>
-      Mensagens chegam fora do horário, durante atendimentos, reuniões ou momentos
-      de descanso. Quando a resposta demora, o contato esfria — e muitas oportunidades
-      simplesmente se perdem.
-    </p>
-  </div>
-</section>
-
-<!-- PROBLEMA -->
-<section class="problem">
-  <div class="container grid-2">
-    <div class="image-box">
-      <img src="img/problem.png" alt="Profissional sobrecarregado com mensagens">
-    </div>
-
-    <div>
-      <h2>O problema não é atender mal</h2>
-
-      <p class="highlight">
-        É não ter um sistema que sustente o atendimento de forma constante.
-      </p>
-
-      <ul class="list">
-        <li>Mensagens acumuladas no WhatsApp</li>
-        <li>Respostas demoradas ou fora de ordem</li>
-        <li>Pacientes que desistem antes de agendar</li>
-        <li>Agenda desorganizada e horários ociosos</li>
-      </ul>
-
-      <p>
-        Sem um processo estruturado, o atendimento depende exclusivamente do seu tempo
-        e da sua atenção — o que não é escalável.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- SOLUÇÃO -->
-<section class="solution">
-  <div class="container grid-2">
-    <div>
-      <h2>O que a Lima IA tech faz, na prática</h2>
-
-      <p>
-        Nós não vendemos um chatbot genérico.
-        Desenvolvemos um <strong>sistema de atendimento automatizado com IA</strong>,
-        criado a partir das informações reais do seu fluxo de atendimento.
-      </p>
-
-      <p>
-        Isso inclui serviços oferecidos, horários, forma de abordagem,
-        perguntas frequentes, critérios de agendamento e regras específicas do seu negócio.
-      </p>
-
-      <p>
-        O resultado é um agente de IA que atende do seu jeito,
-        com linguagem natural, funcionando 24 horas por dia.
-      </p>
-    </div>
-
-    <div class="image-box">
-      <img src="img/solution.png" alt="Fluxo de atendimento automatizado">
-    </div>
-  </div>
-</section>
-
-<section class="cta-soft">
-  <div class="container">
-    <p class="cta-soft-text">
-      Cada consultório odontológico tem uma rotina própria de atendimento,
-      com horários, tipos de procedimentos e formas diferentes de abordagem
-      dos pacientes no WhatsApp.
-    </p>
-    <br>
-    <p class="cta-soft-text">
-      Antes de qualquer configuração, é importante entender como esse fluxo
-      funciona hoje e como um sistema de atendimento automatizado com IA
-      pode se encaixar na sua realidade, sem engessar ou atrapalhar o dia a dia clínico.
-    </p>
-
-    <a 
-      href="https://wa.me/5521993789596"
-      class="btn btn-secondary"
-      target="_blank"
-    >
-      Conversar sobre meu atendimento no WhatsApp
-    </a>
-  </div>
-</section>
-
-<!-- BENEFÍCIOS -->
-<section class="benefits">
-  <div class="container">
-    <h2>O que esse sistema resolve no dia a dia</h2>
-
-    <div class="benefits-grid">
-
-      <div class="benefit-card">
-        <h3>Atendimento automático 24/7</h3>
-        <p>
-          O WhatsApp continua funcionando mesmo fora do horário comercial,
-          evitando que mensagens fiquem sem resposta.
-        </p>
-      </div>
-
-      <div class="benefit-card">
-        <h3>Organização das conversas</h3>
-        <p>
-          O sistema conduz o atendimento de forma lógica,
-          mantendo o fluxo claro e padronizado.
-        </p>
-      </div>
-
-      <div class="benefit-card">
-        <h3>Menos sobrecarga operacional</h3>
-        <p>
-          Você deixa de responder as mesmas perguntas repetidamente
-          e ganha mais foco no atendimento principal.
-        </p>
-      </div>
-
-      <div class="benefit-card">
-        <h3>Encaminhamento para agendamento</h3>
-        <p>
-          O agente conduz o contato até o próximo passo,
-          reduzindo desistências por falta de orientação.
-        </p>
-      </div>
-
-      <div class="benefit-card">
-        <h3>Atendimento padronizado e profissional</h3>
-        <p>
-          Todos os contatos recebem o mesmo nível de atenção,
-          com linguagem adequada ao seu perfil.
-        </p>
-      </div>
-
-      <div class="benefit-card">
-        <h3>Sistema evolutivo</h3>
-        <p>
-          O atendimento pode ser ajustado e refinado
-          conforme o uso e a necessidade do negócio.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- PRODUTOS -->
-<section class="products" id="produtos">
-  <div class="container">
-    <h2>Soluções disponíveis</h2>
-
-    <div class="products-grid">
-
-      <div class="product-card basic">
-        <h3>LIA Basic</h3>
-
-        <p class="product-desc">
-          Sistema de atendimento inicial automatizado para consultórios odontológicos
-          <strong>Ideal para dentistas que trabalham sozinhos</strong> e precisam organizar 
-          o WhatsApp, responder os primeiros contatos com agilidade e evitar perda 
-          de oportunidades enquanto estão em atendimento clínico.
+        <p class="hero-text">
+          Enquanto você está em atendimento clínico, o seu WhatsApp continua respondendo os primeiros contatos com mais agilidade, organização e clareza — sem deixar pacientes sem retorno e sem transformar seu atendimento em algo robótico.
         </p>
 
-        <ul>
-          <li>Atendimento inicial automático pelo WhatsApp</li>
-          <li>Respostas organizadas para dúvidas frequentes</li>
+        <ul class="hero-points">
+          <li>Atendimento inicial automático no WhatsApp</li>
+          <li>Respostas para dúvidas frequentes do consultório</li>
           <li>Triagem dos primeiros contatos de forma natural</li>
-          <li>Registro organizado dos contatos e interesses</li>
-          <li>Encaminhamento de casos importantes para o dentista</li>
-          <li>Personalização conforme a rotina e as regras do consultório</li>
+          <li>Registro organizado dos leads e interesses</li>
         </ul>
 
-        <p class="price-label">
-          Implementação e operação do sistema
-        </p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5521993789596" class="btn" target="_blank">Quero conversar sobre meu consultório</a>
+          <a href="#produtos" class="btn btn-secondary">Ver como funciona</a>
+        </div>
 
-        <p class="price">
-          Setup de Implementação<br>+ R$ 799/mês
+        <p class="hero-note">
+          Ideal para dentistas que trabalham sozinhos e precisam reduzir a sobrecarga do primeiro atendimento.
         </p>
-
-        <p class="setup-desc">
-          O setup é uma etapa inicial única em que estruturamos o atendimento de entrada 
-          do seu consultório no WhatsApp, configurando as informações principais do negócio, 
-          horários, serviços, perguntas frequentes, regras de atendimento e critérios de 
-          encaminhamento, para que o agente responda com mais organização, agilidade e consistência.
-        </p>
-
-        <a href=https://wa.me/5521993789596 class="btn">Iniciar com o LIA C-Basic</a>
       </div>
 
-<!--
+      <div class="image-box">
+        <img src="img/hero.png" alt="Agente de atendimento inicial para consultório odontológico no WhatsApp">
+        <div class="hero-card">
+          <strong>O foco não é substituir você.</strong>
+          <p>É organizar o primeiro atendimento, responder melhor e evitar perda de contatos enquanto sua atenção está no consultório.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <div class="product-card featured">
-        <h3>LIA C-Expert</h3>
+  <!-- CONTEXTO -->
+  <section class="context">
+    <div class="container">
+      <h2>O primeiro contato no WhatsApp não pode depender só do seu tempo</h2>
 
-        <p class="product-desc">
-          Sistema avançado de atendimento automatizado com IA,
-          desenvolvido para <strong>consultórios odontológicos onde o dentista
-          centraliza o atendimento</strong> e precisa de fluxos personalizados
-          e maior controle sobre a agenda e os pacientes.
+      <p>
+        Muitos consultórios odontológicos perdem oportunidades não porque atendem mal, mas porque o primeiro retorno demora, acontece no meio da correria clínica ou fica desorganizado entre várias mensagens.
+      </p>
+
+      <p>
+        O agente de entrada foi pensado exatamente para essa fase: responder o contato inicial, organizar a conversa, registrar o interesse do paciente e encaminhar os casos mais importantes para você com mais clareza.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROBLEMA -->
+  <section class="problem">
+    <div class="container grid-2">
+      <div class="image-box">
+        <img src="img/problem.png" alt="Dentista sobrecarregado com mensagens no WhatsApp">
+      </div>
+
+      <div>
+        <h2>O problema geralmente não é falta de demanda</h2>
+
+        <p class="highlight">
+          É a falta de um atendimento inicial consistente enquanto você está ocupado atendendo.
         </p>
 
-        <ul>
-          <li>Atendimento automático avançado 24/7</li>
-          <li>Fluxos personalizados por tipo de procedimento</li>
-          <li>Qualificação mais detalhada dos pacientes</li>
-          <li>Regras específicas de atendimento e agendamento</li>
-          <li>Encaminhamento inteligente para agenda</li>
-          <li>Evolução contínua do sistema conforme a rotina clínica</li>
+        <ul class="list">
+          <li>Mensagens acumuladas durante os atendimentos</li>
+          <li>Respostas tardias para dúvidas repetidas</li>
+          <li>Pacientes que desistem antes do próximo passo</li>
+          <li>Falta de organização dos contatos e interesses</li>
         </ul>
 
-        <p class="price-label">
-          Implementação e operação do sistema avançado
+        <p>
+          Sem um processo claro no WhatsApp, o atendimento inicial fica totalmente dependente da sua disponibilidade — e isso tende a gerar perda de oportunidades, retrabalho e desgaste.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUÇÃO -->
+  <section class="solution">
+    <div class="container grid-2">
+      <div>
+        <h2>O que a Lima IA tech entrega na prática</h2>
+
+        <p>
+          Em vez de um chatbot genérico, você recebe um <strong>agente de atendimento inicial configurado para a rotina do seu consultório</strong>, com base nas informações reais do seu negócio.
         </p>
 
-        <p class="price">
-          Setup de Implementação Avançada + R$ 1.299/mês
+        <p>
+          Isso inclui horários, serviços, regras do atendimento, dúvidas frequentes, critérios de encaminhamento e limites do que o agente pode ou não pode informar.
         </p>
 
-        <p class="setup-desc">
-          O setup é uma etapa inicial única onde estruturamos o sistema de atendimento
-          com base na rotina real do consultório odontológico,
-          criando fluxos personalizados por procedimento,
-          regras específicas de atendimento e lógica de qualificação
-          para pacientes antes do agendamento.
+        <p>
+          O resultado é um atendimento inicial mais organizado, mais rápido e mais profissional, sem promessas indevidas e sem engessar a sua rotina clínica.
         </p>
-
-        <a href=https://wa.me/5521993789596 class="btn">Iniciar com o LIA C-Expert</a>
       </div>
 
--->
-
+      <div class="image-box">
+        <img src="img/solution.png" alt="Fluxo de atendimento inicial automatizado para dentistas">
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="implementation">
-  <div class="container-implementacao">
-    <h2>Como funciona a implementação</h2>
-
-    <ol>
-      <li><strong>Levantamento do fluxo:</strong> entendemos como você atende hoje.</li>
-      <li><strong>Estruturação do sistema:</strong> transformamos esse fluxo em lógica de IA.</li>
-      <li><strong>Configuração e testes:</strong> validamos respostas e caminhos.</li>
-      <li><strong>Ativação:</strong> o sistema entra em operação no WhatsApp.</li>
-    </ol>
-  </div>
-</section>
-
-<section class="faq">
-  <div class="container">
-    <h2>Perguntas frequentes</h2>
-
-    <div class="faq-item">
-      <h3>O agente de IA substitui uma recepcionista?</h3>
-      <p>
-        O agente de IA não substitui pessoas, mas automatiza o atendimento inicial
-        no WhatsApp. Ele responde dúvidas frequentes, organiza as conversas
-        e encaminha o paciente para o próximo passo, reduzindo a sobrecarga
-        operacional do consultório.
+  <!-- CTA SOFT -->
+  <section class="cta-soft">
+    <div class="container">
+      <p class="cta-soft-text">
+        Cada consultório odontológico tem suas próprias regras de atendimento, tipos de procedimento, horários, políticas e limites de informação.
       </p>
-    </div>
-
-    <div class="faq-item">
-      <h3>O agente de IA conversa de forma natural?</h3>
-      <p>
-        Sim. O sistema é configurado para utilizar linguagem natural,
-        adequada ao perfil do consultório. As respostas são estruturadas
-        a partir do fluxo real de atendimento, evitando respostas genéricas
-        ou robóticas.
+      <p class="cta-soft-text">
+        Por isso, antes de qualquer configuração, o foco é entender como o seu consultório funciona hoje e adaptar o agente de entrada para responder com coerência, organização e segurança no WhatsApp.
       </p>
-    </div>
 
-    <div class="faq-item">
-      <h3>Quanto tempo leva a implementação do sistema?</h3>
-      <p>
-        O prazo varia conforme o nível de personalização escolhido,
-        mas normalmente a implementação inicial leva entre alguns dias
-        e até duas semanas, incluindo configuração, testes e ajustes.
+      <a
+        href="https://wa.me/5521993789596"
+        class="btn"
+        target="_blank"
+      >
+        Conversar sobre meu atendimento inicial
+      </a>
+    </div>
+  </section>
+
+  <!-- BENEFÍCIOS -->
+  <section class="benefits">
+    <div class="container">
+      <h2>O que esse agente ajuda a resolver no dia a dia</h2>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <h3>Primeiro atendimento mais rápido</h3>
+          <p>
+            O WhatsApp não fica parado enquanto você está em procedimento, consulta ou avaliação clínica.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Dúvidas frequentes organizadas</h3>
+          <p>
+            O agente responde perguntas recorrentes com base nas informações autorizadas do seu consultório.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Mais clareza no fluxo</h3>
+          <p>
+            Os primeiros contatos deixam de acontecer de forma improvisada e passam a seguir uma lógica mais consistente.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Registro dos contatos e interesses</h3>
+          <p>
+            O atendimento pode ficar mais organizado, com registro consolidado dos contatos para acompanhamento posterior.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Encaminhamento de casos importantes</h3>
+          <p>
+            Situações que exigem sua atenção podem ser identificadas e encaminhadas de acordo com as regras do consultório.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <h3>Mais profissionalismo no WhatsApp</h3>
+          <p>
+            Seu consultório ganha mais consistência no atendimento inicial sem depender de respostas apressadas ou fora de hora.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUTO -->
+  <section class="products" id="produtos">
+    <div class="container">
+      <h2>Produto de entrada para consultórios odontológicos</h2>
+      <p class="section-subtitle">
+        Uma solução enxuta e objetiva para dentistas que querem começar a organizar o atendimento inicial no WhatsApp sem partir para uma automação complexa logo de início.
       </p>
-    </div>
 
-    <div class="faq-item">
-      <h3>Preciso entender de tecnologia ou IA para usar?</h3>
+      <div class="products-grid">
+        <div class="product-card basic">
+          <div class="product-badge">Oferta de entrada • focada em dentistas</div>
+
+          <h3>LIA Basic</h3>
+
+          <p class="product-desc">
+            Sistema de atendimento inicial automatizado para consultórios odontológicos. Ideal para <strong>dentistas que trabalham sozinhos</strong> e precisam organizar o WhatsApp, responder os primeiros contatos com mais agilidade e evitar perda de oportunidades enquanto estão em atendimento clínico.
+          </p>
+
+          <ul class="product-list">
+            <li>Atendimento inicial automático pelo WhatsApp</li>
+            <li>Respostas organizadas para dúvidas frequentes</li>
+            <li>Triagem dos primeiros contatos de forma natural</li>
+            <li>Registro organizado dos contatos e interesses</li>
+            <li>Encaminhamento de casos importantes para o dentista</li>
+            <li>Personalização conforme a rotina e as regras do consultório</li>
+          </ul>
+
+          <div class="price-box">
+            <div class="price-panel">
+              <p class="price-label">Implementação</p>
+              <p class="price">Setup inicial</p>
+              <small>Valor sob consulta conforme a configuração do consultório</small>
+            </div>
+
+            <div class="price-panel">
+              <p class="price-label">Operação mensal</p>
+              <p class="price">R$ 799<span style="font-size:1rem;font-weight:600">/mês</span></p>
+              <small>Operação e manutenção da solução de entrada</small>
+            </div>
+          </div>
+
+          <p class="setup-desc">
+            O setup é uma etapa inicial única em que estruturamos o atendimento de entrada do seu consultório no WhatsApp, configurando as informações principais do negócio, horários, serviços, dúvidas frequentes, regras de atendimento e critérios de encaminhamento para que o agente responda com mais organização, agilidade e consistência.
+          </p>
+
+          <a href="https://wa.me/5521993789596" class="btn" target="_blank">Quero iniciar com o LIA Basic</a>
+
+          <p class="product-footnote">
+            Indicado para consultórios que querem começar com uma solução mais enxuta, clara e rápida de implantar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPLEMENTAÇÃO -->
+  <section class="implementation">
+    <div class="container-implementacao">
+      <h2>Como funciona a implementação</h2>
+
+      <ol>
+        <li><strong>Levantamento do consultório:</strong> entendemos sua rotina, seus horários, seus serviços e as regras do seu atendimento.</li>
+        <li><strong>Estruturação do agente:</strong> configuramos o atendimento inicial com base nas informações reais do seu consultório.</li>
+        <li><strong>Testes e validação:</strong> revisamos respostas, critérios de encaminhamento e consistência do fluxo.</li>
+        <li><strong>Ativação no WhatsApp:</strong> o agente entra em operação para organizar o primeiro atendimento do seu consultório.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <h2>Perguntas frequentes</h2>
+
+      <div class="faq-item">
+        <h3>Esse agente substitui uma recepcionista?</h3>
+        <p>
+          Não. Ele foi pensado para organizar o atendimento inicial no WhatsApp, responder os primeiros contatos e reduzir a sobrecarga do primeiro atendimento. Casos que exigem ação humana continuam sendo encaminhados conforme as regras definidas.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Ele fala com o paciente de forma natural?</h3>
+        <p>
+          Sim. O agente é configurado para responder de forma clara, acolhedora e profissional, respeitando o perfil do consultório e evitando respostas genéricas ou excessivamente robóticas.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Ele pode informar qualquer preço do consultório?</h3>
+        <p>
+          Não. O agente trabalha apenas com as informações autorizadas por você. O que não estiver liberado na configuração do consultório não deve ser informado ao paciente.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Preciso entender de tecnologia para usar?</h3>
+        <p>
+          Não. A proposta é justamente estruturar o seu atendimento inicial no WhatsApp sem exigir que você precise lidar com a parte técnica da automação.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>O agente pode ser ajustado depois?</h3>
+        <p>
+          Sim. O atendimento pode ser refinado conforme o uso real do consultório, desde que os ajustes continuem dentro do escopo da solução contratada.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta">
+    <div class="container">
+      <h2>Seu consultório não precisa depender só do seu tempo para responder o primeiro contato</h2>
       <p>
-        Não. Todo o sistema é entregue pronto para uso.
-        Você não precisa entender de IA, programação ou automação.
-        Nosso trabalho é transformar o seu fluxo de atendimento
-        em um sistema funcional.
+        Se você quer organizar o atendimento inicial no WhatsApp, responder melhor e evitar perda de oportunidades enquanto está atendendo, vamos conversar sobre a estrutura mais adequada para o seu consultório.
       </p>
+      <a href="https://wa.me/5521993789596" class="btn" target="_blank">Falar com a Lima IA tech</a>
     </div>
+  </section>
 
-    <div class="faq-item">
-      <h3>O sistema pode ser ajustado depois de implementado?</h3>
-      <p>
-        Sim. O agente de IA pode ser refinado e ajustado ao longo do tempo
-        conforme a rotina do consultório muda ou novas necessidades surgem,
-        especialmente no plano LIA C-Expert.
-      </p>
-    </div>
+  <footer>
+    <p>Lima IA tech © 2025</p>
+  </footer>
 
-  </div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="cta">
-  <div class="container">
-    <h2>Seu atendimento pode funcionar melhor</h2>
-    <p>
-      Descubra como um sistema de atendimento automatizado com IA
-      pode organizar seu WhatsApp e reduzir a perda de contatos.
-    </p>
-    <a href=https://wa.me/5521993789596 class="btn">Falar com a Lima IA tech</a>
-  </div>
-</section>
-
-<footer>
-  <p>Lima IA tech © 2025</p>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
